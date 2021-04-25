@@ -4,7 +4,8 @@ import {
   faDiscord,
   faTwitter,
 } from '@fortawesome/free-brands-svg-icons';
-import { Head } from 'next';
+import Head from 'next/head';
+
 export default function Home() {
   const [notifVisible, setNotifVisible] = useState(false);
   return (
