@@ -4,13 +4,43 @@ import {
   faDiscord,
   faTwitter,
 } from '@fortawesome/free-brands-svg-icons';
-
+import { Head } from 'next';
 export default function Home() {
   const [notifVisible, setNotifVisible] = useState(false);
   return (
     <div
       className={`flex-center-col bg-[#1f2124] w-screen h-screen text-center`}
     >
+      <Head>
+        <title>f1sh.me</title>
+        <meta name="title" content="f1sh.me"></meta>
+        <meta
+          name="description"
+          content="Woah! You found my website!"
+        ></meta>
+
+        <meta property="og:type" content="website"></meta>
+        <meta property="og:url" content="https://f1sh.me/"></meta>
+        <meta property="og:title" content="f1sh.me"></meta>
+        <meta
+          property="og:description"
+          content="Woah! You found my website!"
+        ></meta>
+
+        <meta
+          property="twitter:card"
+          content="summary_large_image"
+        ></meta>
+        <meta
+          property="twitter:url"
+          content="https://f1sh.me/"
+        ></meta>
+        <meta property="twitter:title" content="f1sh.me"></meta>
+        <meta
+          property="twitter:description"
+          content="Woah! You found my website!"
+        ></meta>
+      </Head>
       <h1
         className={`text-8xl font-bold text-gradient bg-gradient-to-r from-blue-500 to-indigo-700 font-mono tracking-wider`}
       >
