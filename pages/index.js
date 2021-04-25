@@ -49,7 +49,7 @@ export default function Home() {
       </h1>
       <div className={`text-gray-300 m-4 max-w-xl font-mono`}>
         👋&nbsp;I like coding things, and I also have interest in
-        games, such as <a href="https://minecraft.com">Minecraft</a>{' '}
+        games, such as <a href="https://minecraft.net">Minecraft</a>{' '}
         and <a href="https://beatsaber.com">Beat Saber</a>!
       </div>
 
