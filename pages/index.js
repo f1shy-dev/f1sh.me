@@ -71,6 +71,12 @@ export default function Home() {
       </div>
 
       <div
+        className={`flex-col color-current text-gray-200 text-3xl mt-4`}
+      >
+        <p className={`font-mono text-sm `}>Server Status</p>
+      </div>
+
+      <div
         className={`fixed bottom-0 right-0 bg-blue-400 text-white rounded-full px-4 py-2 m-4 transition-opacity ease-in duration-200 ${
           !notifVisible ? 'opacity-0' : null
         }`}

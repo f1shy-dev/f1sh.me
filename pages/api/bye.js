@@ -1,22 +1,19 @@
 import path from 'path';
 import getConfig from 'next/config';
-import { v4 as uuidv4 } from 'uuid';
 const fs = require('fs');
 const { serverRuntimeConfig } = getConfig();
 
 export default async (req, res) => {
-  const data = uuidv4();
-  fs.writeFile(
+  fs.readFile(
     path.join(serverRuntimeConfig.PROJECT_ROOT, 'pages/api/what.txt'),
-    data,
-    function (err) {
+    function (err, data) {
       if (err) throw err;
       res
         .status(200)
         .send(
-          'You just wrote the ID: ' +
+          'You just got the ID: ' +
             data +
-            ' to pages/api/what.txt!',
+            ' from pages/api/what.txt!',
         );
     },
   );
