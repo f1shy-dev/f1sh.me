@@ -7,17 +7,13 @@ const { serverRuntimeConfig } = getConfig();
 export default async (req, res) => {
   const data = uuidv4();
   fs.writeFile(
-    path.join(serverRuntimeConfig.PROJECT_ROOT, 'pages/api/what.txt'),
+    path.join(serverRuntimeConfig.PROJECT_ROOT, 'what.txt'),
     data,
     function (err) {
       if (err) throw err;
       res
         .status(200)
-        .send(
-          'You just wrote the ID: ' +
-            data +
-            ' to pages/api/what.txt!',
-        );
+        .send('You just wrote the ID: ' + data + ' to what.txt!');
     },
   );
 };
