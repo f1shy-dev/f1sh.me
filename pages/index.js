@@ -73,7 +73,7 @@ export default function Home() {
       <div
         className={`flex-col color-current text-gray-200 text-3xl mt-4`}
       >
-        <p className={`font-mono text-sm `}>Server Status</p>
+        <p className={`font-mono text-sm `}></p>
       </div>
 
       <div
