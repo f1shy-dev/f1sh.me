@@ -8,15 +8,17 @@ export default function handler(req, res) {
 
 const postHandler = (req, res) => {
   if (!req.body.type) return res.status(400);
-  if (req.body.type === 1) return res.status(200).json({ type: 1 });
+  if (req.body.type === 1)
+    return console.log('type:1') && res.status(200).json({ type: 1 });
 
-  res.status(200).json({
-    type: 4,
-    data: {
-      tts: false,
-      content: 'If you see this, something worked!',
-      embeds: [],
-      allowed_mentions: { parse: [] },
-    },
-  });
+  console.log('command') &&
+    res.status(200).json({
+      type: 4,
+      data: {
+        tts: false,
+        content: 'If you see this, something worked!',
+        embeds: [],
+        allowed_mentions: { parse: [] },
+      },
+    });
 };
