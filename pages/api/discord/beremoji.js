@@ -13,7 +13,7 @@ export default function handler(req, res) {
     return res.status(401).send('invalid request signature');
 
   const isVerified = nacl.sign.detached.verify(
-    Buffer.from(timestamp + req.body),
+    Buffer.from(timestamp + JSON.stringify(req.body)),
     Buffer.from(signature, 'hex'),
     Buffer.from(process.env.DISCORD_PUB_KEY, 'hex'),
   );
