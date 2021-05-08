@@ -4,8 +4,8 @@ export default function handler(req, res) {
   res.setHeader('Access-Control-Allow-Credentials', true);
   res.setHeader('Access-Control-Allow-Origin', '*');
 
-  const timestamp = req.headers['X-Signature-Timestamp'];
-  const signature = req.headers['X-Signature-Ed25519'];
+  const timestamp = req.headers['x-signature-timestamp'];
+  const signature = req.headers['x-signature-ed25519'];
 
   console.log(timestamp, signature, req.body, req.headers);
 
