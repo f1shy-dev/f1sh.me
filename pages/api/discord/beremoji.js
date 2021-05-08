@@ -7,7 +7,7 @@ export default function handler(req, res) {
   const timestamp = req.headers['X-Signature-Timestamp'];
   const signature = req.headers['X-Signature-Ed25519'];
 
-  console.log(timestamp, signature, req.body);
+  console.log(timestamp, signature, req.body, req.headers);
 
   if (!timestamp || !signature || !req.body)
     return res.status(401).send('invalid request signature');
