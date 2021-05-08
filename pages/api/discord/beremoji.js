@@ -4,16 +4,20 @@ export default function handler(req, res) {
   res.setHeader('Access-Control-Allow-Credentials', true);
   res.setHeader('Access-Control-Allow-Origin', '*');
 
+  const timestamp = req.headers['X-Signature-Timestamp'];
+  const signature = req.headers['X-Signature-Ed25519'];
+
+  if (!timestamp || !signature || !req.body)
+    return res.status(401).send('invalid request signature');
+
   const isVerified = nacl.sign.detached.verify(
-    Buffer.from(req.headers['X-Signature-Timestamp'] + req.body),
-    Buffer.from(req.headers['X-Signature-Ed25519'], 'hex'),
+    Buffer.from(timestamp + req.body),
+    Buffer.from(signature, 'hex'),
     Buffer.from(process.env.DISCORD_PUB_KEY, 'hex'),
   );
 
   if (!isVerified)
-    return res
-      .status(401)
-      .json({ status: 'error', error: 'invalid request signature' });
+    return res.status(401).send('invalid request signature');
 
   if (req.method === 'POST') return postHandler(req, res);
   res.status(200).json({ status: 'success' });
