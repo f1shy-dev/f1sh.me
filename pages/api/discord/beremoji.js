@@ -1,4 +1,7 @@
 export default function handler(req, res) {
+  res.setHeader('Access-Control-Allow-Credentials', true);
+  res.setHeader('Access-Control-Allow-Origin', '*');
+
   if (req.method === 'POST') return postHandler(req, res);
   res.status(200).json({ status: 'success' });
 }
