@@ -1,6 +1,6 @@
 export default function handler(req, res) {
   if (req.method === 'POST') return postHandler(req, res);
-  res.status(400).json({ status: 'error' });
+  res.status(200).json({ status: 'success' });
 }
 
 const postHandler = (req, res) => {
