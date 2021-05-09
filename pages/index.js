@@ -2,15 +2,17 @@ import React, { useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
   faDiscord,
+  faGithub,
   faTwitter,
 } from '@fortawesome/free-brands-svg-icons';
 import Head from 'next/head';
+import { ProjectCard } from '../components/ProjectCard';
 
 export default function Home() {
   const [notifVisible, setNotifVisible] = useState(false);
   return (
     <div
-      className={`flex-center-col bg-[#1f2124] w-screen h-screen text-center`}
+      className={`flex-center-col bg-[#1f2124] h-full text-center pt-32`}
     >
       <Head>
         <title>f1sh.me</title>
@@ -65,15 +67,33 @@ export default function Home() {
             setTimeout(() => setNotifVisible(false), 5000);
           }}
         />
-        <a href="https://twitter.com/vishyfishy2">
+        <a href="https://twitter.com/vishyfishy2" className={`mr-4`}>
           <FontAwesomeIcon icon={faTwitter} />
+        </a>
+        <a href="https://github.com/f1shy-dev">
+          <FontAwesomeIcon icon={faGithub} />
         </a>
       </div>
 
       <div
-        className={`flex-col color-current text-gray-200 text-3xl mt-4`}
+        className={`flex-col color-current text-gray-200 text-3xl mt-16 mx-4 max-w-xl mb-4`}
       >
-        <p className={`font-mono text-sm `}></p>
+        <p className={`font-mono text-lg mb-2`}>Random Projects</p>
+        <ProjectCard
+          name="serverless-discord"
+          desc="Discord slash command bots, with no code, hosted for free!"
+          comingSoon={true}
+        />
+        <ProjectCard
+          name="f1sh-anime"
+          desc="A reverse engineer of an anime site, with no ads and a modern look."
+          comingSoon={true}
+        />
+        <ProjectCard
+          name="f1sh-cli"
+          desc="A combination of commonly used command line tools."
+          comingSoon={true}
+        />
       </div>
 
       <div
