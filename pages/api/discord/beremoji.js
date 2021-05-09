@@ -18,6 +18,7 @@ export default function handler(req, res) {
 const postHandler = (req, res) => {
   if (!req.body.type) return errorResponse(res, 'Invalid Form Body');
   if (req.body.type === 1) return pingResponse();
+  console.log(req.body.data);
   const result = convertFuzzyFeeling(req.body.data.options[0].value);
   if (result)
     return res.status(200).json({
