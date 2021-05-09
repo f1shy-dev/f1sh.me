@@ -4,7 +4,7 @@ import {
   errorResponse,
   pingResponse,
 } from '../../../lib/discordTools';
-import { convertFuzzyFeeling, convertExactFeeling } from 'beremoji';
+import { convertFuzzyFeeling } from 'beremoji';
 
 export default function handler(req, res) {
   enableCORS(res);
