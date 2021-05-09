@@ -7,8 +7,6 @@ export default function handler(req, res) {
   const timestamp = req.headers['x-signature-timestamp'];
   const signature = req.headers['x-signature-ed25519'];
 
-  console.log(timestamp, signature, req.body, req.headers);
-
   if (!timestamp || !signature || !req.body)
     return res.status(401).send('invalid request signature');
 
@@ -28,6 +26,8 @@ export default function handler(req, res) {
 const postHandler = (req, res) => {
   if (!req.body.type) return res.status(400);
   if (req.body.type === 1) return res.status(200).json({ type: '1' });
+
+  console.log(req.body.data.options);
 
   res.status(200).json({
     type: 4,
