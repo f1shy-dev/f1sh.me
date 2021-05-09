@@ -27,6 +27,7 @@ export default function handler(req, res) {
 const postHandler = (req, res) => {
   if (!req.body.type) return res.status(400);
   if (req.body.type === 1) return res.status(200).json({ type: '1' });
+  console.log(req.body);
   if (req.body.data.name === 'beremoji')
     return convertExactFeeling(req.body.data.options[0].value);
 
