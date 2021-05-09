@@ -56,18 +56,18 @@ export default function Home() {
       </div>
 
       <div
-        className={`flex-row color-current text-gray-200 text-3xl`}
+        className={`flex-row color-current text-gray-200 text-3xl space-x-4`}
       >
         <FontAwesomeIcon
           icon={faDiscord}
-          className={`mr-4 hover-trans`}
+          className={`hover-trans`}
           onClick={() => {
             navigator.clipboard.writeText('F1shNotFound#5117');
             setNotifVisible(true);
             setTimeout(() => setNotifVisible(false), 5000);
           }}
         />
-        <a href="https://twitter.com/vishyfishy2" className={`mr-4`}>
+        <a href="https://twitter.com/vishyfishy2">
           <FontAwesomeIcon icon={faTwitter} />
         </a>
         <a href="https://github.com/f1shy-dev">
