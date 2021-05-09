@@ -1,4 +1,5 @@
 import nacl from 'tweetnacl';
+import { convertFuzzyFeeling } from 'beremoji';
 
 export default function handler(req, res) {
   res.setHeader('Access-Control-Allow-Credentials', true);
@@ -27,13 +28,16 @@ const postHandler = (req, res) => {
   if (!req.body.type) return res.status(400);
   if (req.body.type === 1) return res.status(200).json({ type: '1' });
 
-  console.log(req.body.data.options);
+  const converted = convertFuzzyFeeling(
+    req.body.data.options[0].value,
+  );
+  const emoji = converted || "That isn't a beremoji!";
 
   res.status(200).json({
     type: 4,
     data: {
       tts: false,
-      content: 'If you see this, something worked!',
+      content: emoji,
       embeds: [],
       allowed_mentions: { parse: [] },
     },
