@@ -35,14 +35,11 @@ const postHandler = (req, res) => {
       req.body.data.options[0].value,
     );
 
-    res.status(200).json({
+    return res.status(200).json({
       type: 4,
       data: {
         tts: false,
-        content:
-          converted != null
-            ? converted
-            : "That isn't a valid feeling!",
+        content: converted,
         embeds: [],
         allowed_mentions: { parse: [] },
       },
