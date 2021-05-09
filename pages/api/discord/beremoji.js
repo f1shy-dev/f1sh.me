@@ -10,17 +10,12 @@ export default function handler(req, res) {
     if (!result) throw Error('BeremojiNotFound');
 
     return {
-      tts: false,
       content: result,
-      embeds: [],
-      allowed_mentions: { parse: [] },
     };
   };
 
   const errorHandler = (req, res, err) => {
     return {
-      tts: false,
-      content: '',
       embeds: [
         {
           title: 'Error',
@@ -28,7 +23,6 @@ export default function handler(req, res) {
           color: 15213861,
         },
       ],
-      allowed_mentions: { parse: [] },
     };
   };
 
