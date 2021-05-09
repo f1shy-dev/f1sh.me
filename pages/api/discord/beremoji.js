@@ -42,7 +42,7 @@ const postHandler = (req, res) => {
         embeds: [
           {
             title: 'Error',
-            description: `The beremoji ${req.body.data.options[0].value} doesn't exist!`,
+            description: `The Beremoji \`${req.body.data.options[0].value}\` doesn't exist, or there was an error converting it to an emoji!`,
             color: 15213861,
           },
         ],
