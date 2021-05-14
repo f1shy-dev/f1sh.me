@@ -1,8 +1,8 @@
-/* eslint-disable react/prop-types */
 import '../styles/globals.css';
 import React from 'react';
+import { AppProps } from 'next/dist/next-server/lib/router/router';
 
-function MyApp({ Component, pageProps }) {
+function MyApp({ Component, pageProps }: AppProps) {
   return <Component {...pageProps} />;
 }
 

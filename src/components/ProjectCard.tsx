@@ -1,7 +1,12 @@
-/* eslint-disable react/prop-types */
-
 import React from 'react';
-export const ProjectCard = (props) => (
+
+interface Props {
+  name: string;
+  desc: string;
+  comingSoon: boolean;
+}
+
+export const ProjectCard: React.FC<Props> = (props) => (
   <div
     className={`shadow-lg rounded-md bg-[#333436] flex flex-col py-4 px-8 text-left w-full mb-2`}
   >
