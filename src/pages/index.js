@@ -11,9 +11,7 @@ import { ProjectCard } from '../components/ProjectCard';
 export default function Home() {
   const [notifVisible, setNotifVisible] = useState(false);
   return (
-    <div
-      className={`flex-center-col bg-[#1f2124] h-full text-center pt-32`}
-    >
+    <div className={`flex-center-col h-full text-center pt-32`}>
       <Head>
         <title>f1sh.me</title>
         <meta name="title" content="f1sh.me"></meta>
