@@ -1,8 +1,11 @@
 import { convertFuzzyFeeling } from 'beremoji';
-import discordCommandHandler from '../../../lib/discordCommandHandler';
+import { NextApiHandler } from 'next';
+import discordCommandHandler, {
+  DiscordHandler,
+} from '../../../lib/discordCommandHandler';
 
-export default function handler(req, res) {
-  const reqHandler = (req, res) => {
+const handler: NextApiHandler = (req, res) => {
+  const reqHandler: DiscordHandler = (req) => {
     const result = convertFuzzyFeeling(
       req.body.data.options[0].value,
     );
@@ -14,7 +17,7 @@ export default function handler(req, res) {
     };
   };
 
-  const errorHandler = (req, res, err) => {
+  const errorHandler: DiscordHandler = (req, res, err) => {
     return {
       embeds: [
         {
@@ -27,4 +30,6 @@ export default function handler(req, res) {
   };
 
   return discordCommandHandler(req, res, reqHandler, errorHandler);
-}
+};
+
+export default handler;
