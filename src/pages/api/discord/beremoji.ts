@@ -29,7 +29,13 @@ const handler: NextApiHandler = (req, res) => {
     };
   };
 
-  return discordCommandHandler(req, res, reqHandler, errorHandler);
+  return discordCommandHandler(
+    req,
+    res,
+    reqHandler,
+    errorHandler,
+    process.env.DISCORD_PUBKEY_BEREMOJI,
+  );
 };
 
 export default handler;

@@ -12,6 +12,7 @@ export default function discordCommandHandler(
   res: NextApiResponse,
   reqHandler: DiscordHandler,
   errorHandler: DiscordHandler,
+  pubkey: string,
 ) {
   res.setHeader('Access-Control-Allow-Origin', 'discord.com');
   const timestamp = req.headers['x-signature-timestamp'];
@@ -23,7 +24,7 @@ export default function discordCommandHandler(
   const isVerified = sign.detached.verify(
     Buffer.from(timestamp + JSON.stringify(req.body)),
     Buffer.from(signature, 'hex'),
-    Buffer.from(process.env.DISCORD_PUB_KEY, 'hex'),
+    Buffer.from(pubkey, 'hex'),
   );
 
   if (!isVerified) return errorResponse(res, 'InvalidSignature');
