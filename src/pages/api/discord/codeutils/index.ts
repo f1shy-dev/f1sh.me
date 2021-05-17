@@ -32,7 +32,9 @@ const handler: NextApiHandler = (req, res) => {
 
     if (fuzzResult.length > 1) {
       desc += `Found ${fuzzResult.length} approximate matches!\n`;
-      desc += fuzzResult.map((item) => linkBuilder(item[1]) + '\n');
+      desc += fuzzResult
+        .map((item) => linkBuilder(item[1]))
+        .join('\n');
     }
 
     return {
