@@ -19,6 +19,8 @@ const handler: NextApiHandler = (req, res) => {
       req.body.data.options[0].value,
     )[0][1];
 
+    console.log(fuzzResult, fuzzyPaths.length, req.body.data.options);
+
     if (!fuzzResult) throw Error('nope');
 
     return {
