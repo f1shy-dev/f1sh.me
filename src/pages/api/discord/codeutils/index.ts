@@ -75,9 +75,10 @@ function responseEmbedBuilder(desc, ogValue) {
         description: desc,
         color: 2327644,
         footer: {
-          text: 'Made badly by @Angshu31 and @F1sh',
+          text: 'Made amazingly by @Angshu31 and @F1sh',
         },
       },
     ],
+    flags: 64,
   };
 }
