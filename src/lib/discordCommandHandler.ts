@@ -45,6 +45,7 @@ export default async function discordCommandHandler(
             allowed_mentions: { parse: [] },
             ...(await errorHandler(req, res, err)),
           },
+          flags: 64,
         });
 
       return defaultErrHandler(req, res, err);

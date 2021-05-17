@@ -79,6 +79,5 @@ function responseEmbedBuilder(desc, ogValue) {
         },
       },
     ],
-    flags: 64,
   };
 }
