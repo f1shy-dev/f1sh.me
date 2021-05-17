@@ -31,6 +31,7 @@ export default function discordCommandHandler(
   if (req.body.type === 1) return pingResponse(res);
   if (req.method === 'POST') {
     try {
+      console.log('success');
       return res.status(200).json({
         type: 4,
         data: {
@@ -42,6 +43,8 @@ export default function discordCommandHandler(
         },
       });
     } catch (err) {
+      console.log('err');
+
       if (errorHandler)
         return res.status(200).json({
           type: 4,
@@ -63,7 +66,10 @@ export default function discordCommandHandler(
 const errorResponse = (res, code) =>
   res.status(401).json({ status: 'error', error: code });
 
-const pingResponse = (res) => res.status(200).json({ type: '1' });
+const pingResponse = (res) => {
+  console.log('ping');
+  res.status(200).json({ type: '1' });
+};
 
 const defaultErrHandler = (res) =>
   res.status(500).json({ status: 'error' });
