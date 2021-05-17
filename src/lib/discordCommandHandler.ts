@@ -31,7 +31,6 @@ export default async function discordCommandHandler(
   if (req.body.type === 1) return pingResponse(res);
   if (req.method === 'POST') {
     try {
-      console.log('success');
       return res.status(200).json({
         type: 4,
         data: {
@@ -43,8 +42,6 @@ export default async function discordCommandHandler(
         },
       });
     } catch (err) {
-      console.log('err');
-
       if (errorHandler)
         return res.status(200).json({
           type: 4,

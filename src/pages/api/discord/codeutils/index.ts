@@ -11,19 +11,13 @@ const handler: NextApiHandler = (req, res) => {
       'https://api.github.com/repos/oasis-sh/oasis/git/trees/staging?recursive=1',
     ).then((d) => d.json());
 
-    console.log(githubData.tree.length);
-
     const fuzzyPaths = FuzzySet(
       githubData.tree.map((item) => item.path),
     );
-
-    console.log(fuzzyPaths);
-
+    console.log(req.body.data.options);
     const fuzzResult = fuzzyPaths.get(
       req.body.data.options[0].value,
     )[0][1];
-
-    console.log(fuzzResult);
 
     if (!fuzzResult) throw Error('nope');
 
