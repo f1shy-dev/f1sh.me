@@ -35,11 +35,7 @@ const handler: NextApiHandler = (req, res) => {
     desc += `Found ${result.length} approximate match${
       result.length > 1 && 'es'
     }!\n`;
-    desc += result
-      .sort((a, b) => a - b)
-      .slice(4)
-      .map((item) => linkBuilder(item[1]))
-      .join('\n');
+    desc += result.map((item) => linkBuilder(item[1])).join('\n');
 
     return responseEmbedBuilder(desc, req.body.data.options[0].value);
   };
