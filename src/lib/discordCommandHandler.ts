@@ -54,7 +54,7 @@ export default async function discordCommandHandler(
           },
         });
 
-      return defaultErrHandler(res, err);
+      return defaultErrHandler(req, res, err);
     }
   }
   errorResponse(res, 'InvalidReqMethod');
@@ -68,7 +68,7 @@ const pingResponse = (res) => {
   res.status(200).json({ type: '1' });
 };
 
-const defaultErrHandler = (res, err) => {
-  console.log(err);
+const defaultErrHandler = (req, res, err) => {
+  console.log(err, req.body);
   res.status(500).json({ status: 'error' });
 };
