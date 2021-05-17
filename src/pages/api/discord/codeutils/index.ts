@@ -8,31 +8,42 @@ import discordCommandHandler, {
 const handler: NextApiHandler = (req, res) => {
   const reqHandler: DiscordHandler = async (req) => {
     const githubData = await fetch(
-      'https://api.github.com/repos/oasis-sh/oasis/git/trees/staging?recursive=1',
+      `https://api.github.com/repos/oasis-sh/oasis/git/trees/${
+        req.body.data.options[1].value
+          ? req.body.data.options[1].value
+          : 'staging'
+      }?recursive=1`,
     ).then((d) => d.json());
 
     const fuzzyPaths = FuzzySet(
       githubData.tree.map((item) => item.path),
     );
-    console.log(req.body.data.options);
-    const fuzzResult = fuzzyPaths.get(
-      req.body.data.options[0].value,
-    )[0][1];
 
-    if (!fuzzResult) throw Error('nope');
+    const fuzzResult = fuzzyPaths.get(req.body.data.options[0].value);
 
-    return {
-      content: `https://github.com/oasis-sh/oasis/tree/staging/${fuzzResult}`,
-    };
-  };
+    let desc = '';
+    if (!fuzzResult)
+      desc += `No files were found for the term: \`${req.body.data.options[0].value}\``;
 
-  const errorHandler: DiscordHandler = (req, res, err) => {
+    if (fuzzResult.length == 1 && fuzzResult[0][0] == 1)
+      desc += `Found an exact match!\n${linkBuilder(
+        fuzzResult[0][1],
+      )}`;
+
+    if (fuzzResult.length > 1) {
+      desc += `Found ${fuzzResult.length} approximate matches!\n`;
+      desc += fuzzResult.map((item) => linkBuilder(item[1]) + '\n');
+    }
+
     return {
       embeds: [
         {
-          title: 'Error',
-          description: `420 not found!`,
-          color: 15213861,
+          title: `\`${req.body.data.options[0].value}\``,
+          description: desc,
+          color: 2327644,
+          footer: {
+            text: 'made by @Angshu31 and @F1sh',
+          },
         },
       ],
     };
@@ -42,9 +53,12 @@ const handler: NextApiHandler = (req, res) => {
     req,
     res,
     reqHandler,
-    errorHandler,
     process.env.DISCORD_PUBKEY_CODEUTILS,
   );
 };
 
 export default handler;
+
+function linkBuilder(path) {
+  return `[\`${path}\`](https://github.com/oasis-sh/oasis/tree/staging/${path})`;
+}

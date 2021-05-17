@@ -11,8 +11,8 @@ export default async function discordCommandHandler(
   req: NextApiRequest,
   res: NextApiResponse,
   reqHandler: DiscordHandler,
-  errorHandler: DiscordHandler,
   pubkey: string,
+  errorHandler?: DiscordHandler,
 ) {
   res.setHeader('Access-Control-Allow-Origin', 'discord.com');
   const timestamp = req.headers['x-signature-timestamp'];
