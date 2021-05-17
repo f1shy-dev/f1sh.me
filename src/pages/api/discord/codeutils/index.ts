@@ -7,45 +7,46 @@ import discordCommandHandler, {
 
 const handler: NextApiHandler = (req, res) => {
   const reqHandler: DiscordHandler = async (req) => {
+    const repo = req.body.data.options[1]
+      ? req.body.data.options[1].value ?? 'staging'
+      : 'staging';
+
     const githubData = await fetch(
-      `https://api.github.com/repos/oasis-sh/oasis/git/trees/${
-        req.body.data.options[1]
-          ? req.body.data.options[1].value
-          : 'staging'
-      }?recursive=1`,
+      `https://api.github.com/repos/oasis-sh/oasis/git/trees/${repo}?recursive=1`,
     ).then((d) => d.json());
 
     const fuzzyPaths = FuzzySet(
       githubData.tree.map((item) => item.path),
     );
 
-    const fuzzResult = fuzzyPaths.get(req.body.data.options[0].value);
+    const result = fuzzyPaths
+      .get(req.body.data.options[0].value)
+      .filter((item) => item[0] >= 0.7);
+
+    if (!result) throw 'NoMatches';
+
+    if (result[0][0] == 1.0)
+      return responseEmbedBuilder(
+        `Found an exact match!\n${linkBuilder(result[0][1])}`,
+        req.body.data.options[0].value,
+      );
 
     let desc = '';
-    if (!fuzzResult)
-      desc += `No files were found for the term: \`${req.body.data.options[0].value}\``;
+    desc += `Found ${result.length} approximate match${
+      result.length > 1 && 'es'
+    }!\n`;
+    desc += result.map((item) => linkBuilder(item[1])).join('\n');
 
-    if (fuzzResult.length == 1 && fuzzResult[0][0] == 1)
-      desc += `Found an exact match!\n${linkBuilder(
-        fuzzResult[0][1],
-      )}`;
+    return responseEmbedBuilder(desc, req.body.data.options[0].value);
+  };
 
-    if (fuzzResult.length > 1) {
-      desc += `Found ${fuzzResult.length} approximate matches!\n`;
-      desc += fuzzResult
-        .map((item) => linkBuilder(item[1]))
-        .join('\n');
-    }
-
+  const errorHandler: DiscordHandler = (req) => {
     return {
       embeds: [
         {
-          title: `\`${req.body.data.options[0].value}\``,
-          description: desc,
-          color: 2327644,
-          footer: {
-            text: 'made by @Angshu31 and @F1sh',
-          },
+          title: 'Error',
+          description: `There were no matches found for \`${req.body.data.options[0].value}\`, or there was an error.`,
+          color: 15213861,
         },
       ],
     };
@@ -56,6 +57,7 @@ const handler: NextApiHandler = (req, res) => {
     res,
     reqHandler,
     process.env.DISCORD_PUBKEY_CODEUTILS,
+    errorHandler,
   );
 };
 
@@ -63,4 +65,19 @@ export default handler;
 
 function linkBuilder(path) {
   return `[\`${path}\`](https://github.com/oasis-sh/oasis/tree/staging/${path})`;
+}
+
+function responseEmbedBuilder(desc, ogValue) {
+  return {
+    embeds: [
+      {
+        title: `\`${ogValue}\``,
+        description: desc,
+        color: 2327644,
+        footer: {
+          text: 'made by @Angshu31 and @F1sh',
+        },
+      },
+    ],
+  };
 }
