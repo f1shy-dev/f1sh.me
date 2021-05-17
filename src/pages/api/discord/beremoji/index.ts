@@ -33,8 +33,8 @@ const handler: NextApiHandler = (req, res) => {
     req,
     res,
     reqHandler,
-    errorHandler,
     process.env.DISCORD_PUBKEY_BEREMOJI,
+    errorHandler,
   );
 };
 
