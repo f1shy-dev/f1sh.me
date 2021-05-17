@@ -69,6 +69,6 @@ const pingResponse = (res) => {
 };
 
 const defaultErrHandler = (req, res, err) => {
-  console.log(err, req.body);
+  console.log(err, req.body.data.options);
   res.status(500).json({ status: 'error' });
 };
