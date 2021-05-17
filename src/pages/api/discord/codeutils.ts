@@ -31,7 +31,7 @@ const handler: NextApiHandler = (req, res) => {
       embeds: [
         {
           title: 'Error',
-          description: `609 not found!`,
+          description: `420 not found!`,
           color: 15213861,
         },
       ],
