@@ -7,7 +7,7 @@ export type DiscordHandler = (
   err?: Error,
 ) => any;
 
-export default function discordCommandHandler(
+export default async function discordCommandHandler(
   req: NextApiRequest,
   res: NextApiResponse,
   reqHandler: DiscordHandler,
@@ -39,7 +39,7 @@ export default function discordCommandHandler(
           content: '',
           embeds: [],
           allowed_mentions: { parse: [] },
-          ...reqHandler(req, res, null),
+          ...(await reqHandler(req, res, null)),
         },
       });
     } catch (err) {
@@ -53,7 +53,7 @@ export default function discordCommandHandler(
             content: '',
             embeds: [],
             allowed_mentions: { parse: [] },
-            ...errorHandler(req, res, err),
+            ...(await errorHandler(req, res, err)),
           },
         });
 
