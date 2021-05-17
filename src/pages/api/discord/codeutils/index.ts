@@ -9,7 +9,7 @@ const handler: NextApiHandler = (req, res) => {
   const reqHandler: DiscordHandler = async (req) => {
     const githubData = await fetch(
       `https://api.github.com/repos/oasis-sh/oasis/git/trees/${
-        req.body.data.options[1].value
+        req.body.data.options[1]
           ? req.body.data.options[1].value
           : 'staging'
       }?recursive=1`,
