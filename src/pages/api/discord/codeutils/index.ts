@@ -21,7 +21,7 @@ const handler: NextApiHandler = (req, res) => {
 
     const result = fuzzyPaths
       .get(req.body.data.options[0].value)
-      .filter((item) => item[0] >= 0.7);
+      .filter((item) => item[0] >= 0.8);
 
     if (!result) throw 'NoMatches';
 
@@ -35,7 +35,11 @@ const handler: NextApiHandler = (req, res) => {
     desc += `Found ${result.length} approximate match${
       result.length > 1 && 'es'
     }!\n`;
-    desc += result.map((item) => linkBuilder(item[1])).join('\n');
+    desc += result
+      .sort((a, b) => a - b)
+      .slice(4)
+      .map((item) => linkBuilder(item[1]))
+      .join('\n');
 
     return responseEmbedBuilder(desc, req.body.data.options[0].value);
   };
@@ -75,7 +79,7 @@ function responseEmbedBuilder(desc, ogValue) {
         description: desc,
         color: 2327644,
         footer: {
-          text: 'made by @Angshu31 and @F1sh',
+          text: 'Made badly by @Angshu31 and @F1sh',
         },
       },
     ],
