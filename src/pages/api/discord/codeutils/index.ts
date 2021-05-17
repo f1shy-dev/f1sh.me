@@ -3,7 +3,7 @@ const FuzzySet = require('fuzzyset');
 
 import discordCommandHandler, {
   DiscordHandler,
-} from '../../../lib/discordCommandHandler';
+} from '../../../../lib/discordCommandHandler';
 
 const handler: NextApiHandler = (req, res) => {
   const reqHandler: DiscordHandler = async (req) => {

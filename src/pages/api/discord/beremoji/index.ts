@@ -2,7 +2,7 @@ import { convertFuzzyFeeling } from 'beremoji';
 import { NextApiHandler } from 'next';
 import discordCommandHandler, {
   DiscordHandler,
-} from '../../../lib/discordCommandHandler';
+} from '../../../../lib/discordCommandHandler';
 
 const handler: NextApiHandler = (req, res) => {
   const reqHandler: DiscordHandler = (req) => {
