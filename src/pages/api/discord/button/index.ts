@@ -28,7 +28,7 @@ const handler: NextApiHandler = (req, res) => {
     req,
     res,
     reqHandler,
-    process.env.DISCORD_PUBKEY_BEREMOJI,
+    process.env.DISCORD_PUBKEY_BUTTON,
   );
 };
 
