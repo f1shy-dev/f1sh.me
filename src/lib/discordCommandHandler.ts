@@ -59,7 +59,7 @@ const errorResponse = (res, code) =>
 
 const pingResponse = (res) => {
   console.log('ping');
-  res.status(200).json({ type: '1' });
+  res.status(200).json({ type: 1 });
 };
 
 const defaultErrHandler = (req, res, err) => {
