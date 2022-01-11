@@ -1,35 +1,27 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap");
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-html,
-body {
+* {
+  box-sizing: border-box;
   padding: 0;
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto,
-    Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue,
-    sans-serif;
+  font-family: "Poppins", -apple-system, BlinkMacSystemFont, Segoe UI,
+    Roboto, Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans,
+    Helvetica Neue, sans-serif;
 }
 
 body {
   background-color: #1f2124;
+  background: linear-gradient(to bottom, #2c5364, #203a43, #0f2027);
 }
+
 a {
   color: inherit;
   text-decoration: none;
-  @apply hover:text-[#8ad6f1] transition duration-200 ease-in-out underline;
-}
-
-.hover-trans {
-  @apply hover:text-[#8ad6f1] transition duration-200 ease-in-out underline;
-}
-
-* {
-  box-sizing: border-box;
-}
-
-code {
-  @apply bg-gray-600 text-xs p-1 rounded-md;
+  @apply hover:text-[#7f7fd5] duration-200 ease-in-out font-bold;
 }
 
 @layer utilities {
@@ -41,7 +33,12 @@ code {
     @apply flex flex-col items-center justify-center;
   }
 
+  .font-norm {
+    font-weight: 400 !important;
+  }
+
   .text-gradient {
+    background: linear-gradient(to right, #7f7fd5, #86a8e7, #91eae4);
     background-clip: text;
     -webkit-text-fill-color: transparent;
   }
